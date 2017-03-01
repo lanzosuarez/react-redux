@@ -2,26 +2,26 @@ import webpack from 'webpack';
 import path from 'path';
 
 export default {
-  debug: true,
+  debug: true, //enalbes displaying debug information
   devtool: 'inline-source-map',
-  noInfo: false,
+  noInfo: false, //will display all the files that ir's bundling
   entry: [
     'eventsource-polyfill', // necessary for hot reloading with IE
     'webpack-hot-middleware/client?reload=true', //note that it reloads the page if hot module reloading fails.
     path.resolve(__dirname, 'src/index')
   ],
-  target: 'web',
+  target: 'web',//you can change it to node. it is used so that webpack knows who is it building for
   output: {
     path: __dirname + '/dist', // Note: Physical files are only output by the production build task `npm run build`.
     publicPath: '/',
     filename: 'bundle.js'
   },
   devServer: {
-    contentBase: path.resolve(__dirname, 'src')
+    contentBase: path.resolve(__dirname, 'src') //tell the webpack where your code is
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin()
+    new webpack.HotModuleReplacementPlugin(), ///module for hot reloading. replace modules without having full browser refresh
+    new webpack.NoErrorsPlugin() //keep errors from breaking hot reloading. instead you'll see error messages in the browser
   ],
   module: {
     loaders: [
